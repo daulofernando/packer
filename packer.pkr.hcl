@@ -6,7 +6,7 @@ source "amazon-ebs" "ubuntu" {
   source_ami_filter {
     filters = {
       virtualization-type = "hvm"
-      name                = "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*"
+      name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
       root-device-type    = "ebs"
     }
     owners      = ["099720109477"]
@@ -14,7 +14,7 @@ source "amazon-ebs" "ubuntu" {
   }
 
   tags = {
-    Name    = "ubuntu 16.04"
+    Name    = "ubuntu 20.04"
     projeto = "projeto x"
   }
 
@@ -25,7 +25,7 @@ build {
   sources = ["source.amazon-ebs.ubuntu"]
 
   provisioner "shell" {
-    inline = ["apt-get install -y sl"]
+    inline = ["sudo apt-get install -y sl"]
     only = ["ubuntu"]
   }
 }
