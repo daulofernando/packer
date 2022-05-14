@@ -1,6 +1,6 @@
 {
  "builders": [
-   {
+   { 
      "type": "amazon-ebs",
      "region": "us-west-2",
      "source_ami": "ami-0688ba7eeeeefe3cd",
