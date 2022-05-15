@@ -25,8 +25,7 @@ build {
   sources = ["source.amazon-ebs.ubuntu"]
 
   provisioner "shell" {
-    inline = ["sudo apt-get install -y sl"]
-    only = ["ubuntu"]
+    script = "./script.sh" 
   }
 }
 
