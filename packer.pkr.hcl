@@ -1,7 +1,12 @@
+variables {
+  region = "us-west-2"
+  name = "packer_AWS {{timestamp}}"
+}
+
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "packer_AWS {{timestamp}}"
+  ami_name      = var.name
   instance_type = "t2.micro"
-  region        = "us-west-2"
+  region        = var.region
 
   source_ami_filter {
     filters = {
@@ -15,7 +20,7 @@ source "amazon-ebs" "ubuntu" {
 
   tags = {
     Name    = "ubuntu 20.04"
-    projeto = "projeto x"
+    esquema = "projeto x"
   }
 
   ssh_username = "ubuntu"
@@ -27,5 +32,9 @@ build {
   provisioner "shell" {
     script = "./script.sh" 
   }
-}
 
+  post-processor "manifest" {
+    output = "outputs.json"
+    strip_path = true
+  }
+}
