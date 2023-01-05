@@ -1,12 +1,14 @@
-variables {
-  region = "us-west-2"
-  name = "packer_AWS {{timestamp}}"
-}
-
 source "amazon-ebs" "ubuntu" {
-  ami_name      = var.name
-  instance_type = "t2.micro"
+  ssh_username = "ubuntu"
+  ami_name      = var.ami_name
+  instance_type = var.instance_type 
   region        = var.region
+
+  tags = {
+    Name    = "ubuntu 20.04"
+    Base_AMI_Name = "{{ .SourceAMIName }}"
+    Release = var.release
+  }
 
   source_ami_filter {
     filters = {
@@ -17,13 +19,6 @@ source "amazon-ebs" "ubuntu" {
     owners      = ["099720109477"]
     most_recent = true
   }
-
-  tags = {
-    Name    = "ubuntu 20.04"
-    esquema = "projeto x"
-  }
-
-  ssh_username = "ubuntu"
 }
 
 build {
